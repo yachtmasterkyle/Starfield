@@ -38,20 +38,27 @@ class NormalParticle
 	}
 	void move()
 	{
-		if(timer < 125)
-		{
-			nX = nX + (int)(Math.cos(dTheta) * dSpeed);
-			nY = nY + (int)(Math.sin(dTheta) * dSpeed);
-		}
-		else if(timer >= 125 && timer < 250)
-		{
-			nX = nX - (int)(Math.cos(dTheta) * dSpeed);
-			nY = nY - (int)(Math.sin(dTheta) * dSpeed);
-		}
-		else
-		{
-			timer = 0;
-		}
+		// if(timer < 125)
+		// {
+		// 	nX = nX + (int)(Math.cos(dTheta) * dSpeed);
+		// 	nY = nY + (int)(Math.sin(dTheta) * dSpeed);
+		// }
+		// else if(timer >= 125 && timer < 250)
+		// {
+		// 	nX = nX - (int)(Math.cos(dTheta) * dSpeed);
+		// 	nY = nY - (int)(Math.sin(dTheta) * dSpeed);
+		// }
+		// else
+		// {
+		// 	timer = 0;
+		// }\
+	 	nX = nX + (int)(Math.cos(dTheta) * dSpeed);
+	 	nY = nY + (int)(Math.sin(dTheta) * dSpeed);
+	 	if(nX >= 810 || nX <= -10 || nY >= 810 || nY <= -10)
+	 	{
+	 		nX = 400;
+	 		nY = 400;
+	 	}
 	}
 	//your code here
 }
