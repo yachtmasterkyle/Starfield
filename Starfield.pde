@@ -1,12 +1,13 @@
-NormalParticle [] star; //your code here
-int timer = 0;
+Particle [] star; //your code here
 void setup()
 {
-	star = new NormalParticle[5000];
+	star = new Particle[7500];
 	for(int i = 0; i < star.length; i++)
 	{
 		star[i] = new NormalParticle();
 	}
+	star[7499] = new OddballParticle();
+	//star[7500] = new JumboParticle();
 	size(800, 800);//your code here
 }
 void draw()
@@ -17,9 +18,8 @@ void draw()
 		star[i].move();
 		star[i].show();
 	} //your code here
-	timer++;
 }
-class NormalParticle
+class NormalParticle implements Particle
 {
 	double dTheta, dSpeed;
 	int nX, nY, myColor;
@@ -29,14 +29,14 @@ class NormalParticle
 		nX = 400;
 		nY = 400;
 		dSpeed = (Math.random() * 25);
-		myColor = color((int)(Math.random() * 255), (int)(Math.random() * 255), (int)(Math.random() * 255));
+		myColor = (int)(Math.random() * 255);
 	}
-	void show()
+	public void show()
 	{
-		fill(myColor);
-		ellipse(nX, nY, 10, 10);
+		fill(myColor, myColor, myColor);
+		ellipse(nX, nY, 5, 5);
 	}
-	void move()
+	public void move()
 	{
 		// if(timer < 125)
 		// {
@@ -59,27 +59,42 @@ class NormalParticle
 	 		nX = 400;
 	 		nY = 400;
 	 	}
-	}
-	//your code here
+	}	//your code here
 }
 interface Particle
 {
-	//your code here
+	public void move();
+	public void show();//your code here
 }
-class OddballParticle //uses an interface
+class OddballParticle implements Particle//uses an interface
 {
-	//your code here
-}
-class JumboParticle //uses inheritance
-{
-	//your code here
-}
-void mousePressed()
-{
-	background(0);
-	for(int i = 0; i < star.length; i++)
+	double dTheta, dSpeed;
+	int nX, nY, myColor;
+	OddballParticle()
 	{
-		star[i].move();
-		star[i].show();
+		dTheta = (Math.random() * (2*Math.PI));
+		nX = 400;
+		nY = 400;
+		dSpeed = (Math.random() * 50);
+		myColor = (int)(Math.random() * 255);
 	}
+	public void show()
+	{
+		fill((int)(Math.random() * 255), (int)(Math.random() * 255), (int)(Math.random() * 255));
+		ellipse(nX, nY, 20, 20);
+	}//your code here
+	public void move()
+	{
+	 	nX = nX + (int)(Math.cos(dTheta) * dSpeed);
+	 	nY = nY + (int)(Math.sin(dTheta) * dSpeed);
+	 	if(nX >= 810 || nX <= -10 || nY >= 810 || nY <= -10)
+	 	{
+	 		nX = 400;
+	 		nY = 400;
+	 	}
+	}
+}
+class JumboParticle extends NormalParticle//uses inheritance
+{
+	//your code here
 }
