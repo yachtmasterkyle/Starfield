@@ -6,8 +6,8 @@ void setup()
 	{
 		star[i] = new NormalParticle();
 	}
-	star[7499] = new OddballParticle();
-	//star[7500] = new JumboParticle();
+	star[7498] = new OddballParticle();
+	star[7499] = new JumboParticle();
 	size(800, 800);//your code here
 }
 void draw()
@@ -91,10 +91,36 @@ class OddballParticle implements Particle//uses an interface
 	 	{
 	 		nX = 400;
 	 		nY = 400;
+	 		dTheta = (Math.random() * (2*Math.PI));
 	 	}
 	}
 }
 class JumboParticle extends NormalParticle//uses inheritance
 {
-	//your code here
+	double dTheta, dSpeed;
+	int nX, nY, myColor;
+	JumboParticle()
+	{
+		dTheta = (Math.random() * (2*Math.PI));
+		nX = 400;
+		nY = 400;
+		dSpeed = (Math.random() * 50);
+		myColor = (int)(Math.random() * 255);
+	}
+	public void show()
+	{
+		fill(myColor);
+		ellipse(nX, nY, 50, 50);
+	}//your code here
+	public void move()
+	{
+	 	nX = nX + (int)(Math.cos(dTheta) * dSpeed);
+	 	nY = nY + (int)(Math.sin(dTheta) * dSpeed);
+	 	if(nX >= 810 || nX <= -10 || nY >= 810 || nY <= -10)
+	 	{
+	 		nX = 400;
+	 		nY = 400;
+	 		dTheta = (Math.random() * (2*Math.PI));
+	 	}
+	}	//your code here
 }
